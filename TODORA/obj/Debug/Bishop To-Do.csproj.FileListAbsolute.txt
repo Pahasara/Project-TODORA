@@ -1,0 +1,19 @@
+C:\Users\Pahasara\OneDrive\Documents\Visual Studio 2022\Projects\Bishop To-Do\Bishop To-Do\bin\Debug\Bishop To-Do.exe.config
+C:\Users\Pahasara\OneDrive\Documents\Visual Studio 2022\Projects\Bishop To-Do\Bishop To-Do\bin\Debug\Bishop To-Do.exe
+C:\Users\Pahasara\OneDrive\Documents\Visual Studio 2022\Projects\Bishop To-Do\Bishop To-Do\bin\Debug\Bishop To-Do.pdb
+C:\Users\Pahasara\OneDrive\Documents\Visual Studio 2022\Projects\Bishop To-Do\Bishop To-Do\obj\Debug\Bishop To-Do.csproj.AssemblyReference.cache
+C:\Users\Pahasara\OneDrive\Documents\Visual Studio 2022\Projects\Bishop To-Do\Bishop To-Do\obj\Debug\Bishop_To_Do.MainWindow.resources
+C:\Users\Pahasara\OneDrive\Documents\Visual Studio 2022\Projects\Bishop To-Do\Bishop To-Do\obj\Debug\Bishop_To_Do.Properties.Resources.resources
+C:\Users\Pahasara\OneDrive\Documents\Visual Studio 2022\Projects\Bishop To-Do\Bishop To-Do\obj\Debug\Bishop To-Do.csproj.GenerateResource.cache
+C:\Users\Pahasara\OneDrive\Documents\Visual Studio 2022\Projects\Bishop To-Do\Bishop To-Do\obj\Debug\Bishop To-Do.csproj.CoreCompileInputs.cache
+C:\Users\Pahasara\OneDrive\Documents\Visual Studio 2022\Projects\Bishop To-Do\Bishop To-Do\obj\Debug\Bishop To-Do.exe
+C:\Users\Pahasara\OneDrive\Documents\Visual Studio 2022\Projects\Bishop To-Do\Bishop To-Do\obj\Debug\Bishop To-Do.pdb
+C:\Users\Pahasara\OneDrive\Documents\Visual Studio 2022\Projects\Bishop To-Do\Bishop To-Do\bin\Debug\EntityFramework.dll
+C:\Users\Pahasara\OneDrive\Documents\Visual Studio 2022\Projects\Bishop To-Do\Bishop To-Do\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Pahasara\OneDrive\Documents\Visual Studio 2022\Projects\Bishop To-Do\Bishop To-Do\bin\Debug\System.Data.SQLite.dll
+C:\Users\Pahasara\OneDrive\Documents\Visual Studio 2022\Projects\Bishop To-Do\Bishop To-Do\bin\Debug\System.Data.SQLite.EF6.dll
+C:\Users\Pahasara\OneDrive\Documents\Visual Studio 2022\Projects\Bishop To-Do\Bishop To-Do\bin\Debug\System.Data.SQLite.Linq.dll
+C:\Users\Pahasara\OneDrive\Documents\Visual Studio 2022\Projects\Bishop To-Do\Bishop To-Do\bin\Debug\EntityFramework.xml
+C:\Users\Pahasara\OneDrive\Documents\Visual Studio 2022\Projects\Bishop To-Do\Bishop To-Do\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Pahasara\OneDrive\Documents\Visual Studio 2022\Projects\Bishop To-Do\Bishop To-Do\bin\Debug\System.Data.SQLite.xml
+C:\Users\Pahasara\OneDrive\Documents\Visual Studio 2022\Projects\Bishop To-Do\Bishop To-Do\obj\Debug\Bishop To-Do.csproj.CopyComplete
