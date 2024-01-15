@@ -13,8 +13,6 @@ namespace TODORA
             InitializeComponent();
         }
 
-        int isOnlyFinished  = 2;
-
         // Import DwmApi to set TITLE bar DARK
         [DllImport("DwmApi")]
         private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, int[] attrValue, int attrSize);
@@ -64,15 +62,6 @@ namespace TODORA
 
         private void readData(string str = ";")
         {
-            if (str == ";" && isOnlyFinished == 1)
-            {
-                str = " WHERE Status = '1'";
-            }
-            else if (str == ";" && isOnlyFinished == 0)
-            {
-                str = " WHERE Status = '0'";
-            }
-
             SQLiteConnection conn;
             conn = CreateConnection();
             SQLiteDataReader sql_datareader;
@@ -95,7 +84,7 @@ namespace TODORA
             conn.Close();
         }
 
-        private void deleteData()
+        private void resetTable()
         {
             try
             {
@@ -104,6 +93,8 @@ namespace TODORA
                 SQLiteCommand sql_cmd;
                 sql_cmd = conn.CreateCommand();
                 sql_cmd.CommandText = "DELETE FROM TaskList;";
+                sql_cmd.ExecuteNonQuery();
+                sql_cmd.CommandText = "UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='TaskList';";
                 sql_cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -153,17 +144,18 @@ namespace TODORA
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
+            this.Opacity = 0.95;
             readData();
             if (taskList.Items.Count == 0)
             {
-                taskList.Items.Add("Nothing is here.... Add new tasks...");
+                taskList.Items.Add("Nothing to do...");
             }
         }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
             deleteTasks();
-            deleteData();
+            resetTable();
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -212,40 +204,68 @@ namespace TODORA
 
         private void tabALL_Click(object sender, EventArgs e)
         {
-            isOnlyFinished = 2;
             tabIndicator.Location = tabALL.Location;
             tabIndicator.BackColor = Color.Silver;
             tabALL.BackColor = Color.FromArgb(64,64,64);
-            tabFinished.BackColor = Color.FromArgb(18, 18, 18);
-            tabUnfinished.BackColor = Color.FromArgb(18, 18, 18);
+            tabAssignment.BackColor = Color.FromArgb(12, 12, 12);
+            tabOther.BackColor = Color.FromArgb(12, 12, 12);
+            tabResearch.BackColor = Color.FromArgb(12, 12, 12);
+            tabReport.BackColor = Color.FromArgb(12, 12, 12);
             readData();
         }
 
-        private void tabFinished_Click(object sender, EventArgs e)
-        {
-            isOnlyFinished = 1;
-            tabIndicator.Location = tabFinished.Location;
-            tabIndicator.BackColor = Color.FromArgb(27, 158, 26);
-            tabFinished.BackColor = Color.FromArgb(14, 60, 19);
-            tabALL.BackColor = Color.FromArgb(18, 18, 18);
-            tabUnfinished.BackColor = Color.FromArgb(18, 18, 18);
-            readData(" WHERE Status = '1'");
-        }
-
-        private void tabUnfinished_Click(object sender, EventArgs e)
-        {
-            isOnlyFinished = 0;
-            tabIndicator.Location = tabUnfinished.Location;
-            tabIndicator.BackColor = Color.FromArgb(255, 0, 0);
-            tabUnfinished.BackColor = Color.FromArgb(60, 6, 1);
-            tabFinished.BackColor = Color.FromArgb(18, 18, 18);
-            tabALL.BackColor = Color.FromArgb(18, 18, 18);
-            readData(" WHERE Status = '0'");
-        }
 
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void tabAssignment_Click(object sender, EventArgs e)
+        {
+            tabIndicator.Location = tabAssignment.Location;
+            tabIndicator.BackColor = Color.FromArgb(27, 158, 26);
+            tabAssignment.BackColor = Color.FromArgb(14, 60, 19);
+            tabALL.BackColor = Color.FromArgb(12, 12, 12);
+            tabReport.BackColor = Color.FromArgb(12, 12, 12);
+            tabOther.BackColor = Color.FromArgb(12, 12, 12);
+            tabResearch.BackColor = Color.FromArgb(12, 12, 12);
+            readData(" WHERE Type = 'Assignment'");
+        }
+
+        private void tabReport_Click(object sender, EventArgs e)
+        {
+            tabIndicator.Location = tabReport.Location;
+            tabIndicator.BackColor = Color.FromArgb(255, 0, 0);
+            tabReport.BackColor = Color.FromArgb(60, 6, 1);
+            tabAssignment.BackColor = Color.FromArgb(12, 12, 12);
+            tabOther.BackColor = Color.FromArgb(12, 12, 12);
+            tabResearch.BackColor = Color.FromArgb(12, 12, 12);
+            tabALL.BackColor = Color.FromArgb(12, 12, 12);
+            readData(" WHERE Type = 'Report'");
+        }
+
+        private void tabResearch_Click(object sender, EventArgs e)
+        {
+            tabIndicator.Location = tabResearch.Location;
+            tabIndicator.BackColor = Color.FromArgb(6, 117, 153);
+            tabResearch.BackColor = Color.FromArgb(3, 36, 53);
+            tabAssignment.BackColor = Color.FromArgb(12, 12, 12);
+            tabALL.BackColor = Color.FromArgb(12, 12, 12);
+            tabOther.BackColor = Color.FromArgb(12, 12, 12);
+            tabReport.BackColor = Color.FromArgb(12, 12, 12);
+            readData(" WHERE Type = 'Research'");
+        }
+
+        private void tabOther_Click(object sender, EventArgs e)
+        {
+            tabIndicator.Location = tabOther.Location;
+            tabIndicator.BackColor = Color.MediumSlateBlue;
+            tabOther.BackColor = Color.FromArgb(41, 36, 74);
+            tabAssignment.BackColor = Color.FromArgb(12, 12, 12);
+            tabResearch.BackColor = Color.FromArgb(12, 12, 12);
+            tabReport.BackColor = Color.FromArgb(12, 12, 12);
+            tabALL.BackColor = Color.FromArgb(12, 12, 12);
+            readData(" WHERE Type = 'Other'");
         }
     }
 }
