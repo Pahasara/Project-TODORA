@@ -86,20 +86,23 @@ namespace TODORA
 
         private void resetTable()
         {
-            try
+            if (MessageBox.Show("All data will be deleted. Do you Want to Confirm", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
-                SQLiteConnection conn;
-                conn = CreateConnection();
-                SQLiteCommand sql_cmd;
-                sql_cmd = conn.CreateCommand();
-                sql_cmd.CommandText = "DELETE FROM TaskList;";
-                sql_cmd.ExecuteNonQuery();
-                sql_cmd.CommandText = "UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='TaskList';";
-                sql_cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "ERROR");
+                try
+                {
+                    SQLiteConnection conn;
+                    conn = CreateConnection();
+                    SQLiteCommand sql_cmd;
+                    sql_cmd = conn.CreateCommand();
+                    sql_cmd.CommandText = "DELETE FROM TaskList;";
+                    sql_cmd.ExecuteNonQuery();
+                    sql_cmd.CommandText = "UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='TaskList';";
+                    sql_cmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.ToString(), "ERROR");
+                }
             }
         }
 
@@ -162,20 +165,23 @@ namespace TODORA
         {
             if (txtID.Text != "")
             {
-                try
+                if (MessageBox.Show($"Task #{txtID.Text} will be deleted. Do you Want to Confirm", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
-                    SQLiteConnection conn;
-                    conn = CreateConnection();
-                    SQLiteCommand sql_cmd;
-                    sql_cmd = conn.CreateCommand();
-                    sql_cmd.CommandText = "DELETE FROM TaskList WHERE ID = " + txtID.Text + ";";
-                    sql_cmd.ExecuteNonQuery();
-                    txtID.Clear();
-                    readData();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString(), "ERROR");
+                    try
+                    {
+                        SQLiteConnection conn;
+                        conn = CreateConnection();
+                        SQLiteCommand sql_cmd;
+                        sql_cmd = conn.CreateCommand();
+                        sql_cmd.CommandText = "DELETE FROM TaskList WHERE ID = " + txtID.Text + ";";
+                        sql_cmd.ExecuteNonQuery();
+                        txtID.Clear();
+                        readData();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.ToString(), "ERROR");
+                    }
                 }
             }
         }
