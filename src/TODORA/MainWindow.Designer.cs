@@ -33,11 +33,11 @@
             this.panelMainMnu = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panelMenu = new System.Windows.Forms.Panel();
-            this.tabOther = new System.Windows.Forms.Button();
-            this.tabMeetings = new System.Windows.Forms.Button();
-            this.tabHobbies = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
             this.tabIndicator = new System.Windows.Forms.Label();
+            this.tabOther = new System.Windows.Forms.Button();
+            this.tabMeeting = new System.Windows.Forms.Button();
+            this.tabHobby = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.tabResearch = new System.Windows.Forms.Button();
             this.tabReport = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
@@ -61,6 +61,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label6 = new System.Windows.Forms.Label();
             this.panelMainMnu.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelMenu.SuspendLayout();
@@ -95,11 +96,11 @@
             this.panelMenu.BackColor = System.Drawing.Color.Black;
             this.panelMenu.BackgroundImage = global::Todora.Properties.Resources.BG2;
             this.panelMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelMenu.Controls.Add(this.tabOther);
-            this.panelMenu.Controls.Add(this.tabMeetings);
-            this.panelMenu.Controls.Add(this.tabHobbies);
-            this.panelMenu.Controls.Add(this.btnDelete);
             this.panelMenu.Controls.Add(this.tabIndicator);
+            this.panelMenu.Controls.Add(this.tabOther);
+            this.panelMenu.Controls.Add(this.tabMeeting);
+            this.panelMenu.Controls.Add(this.tabHobby);
+            this.panelMenu.Controls.Add(this.btnDelete);
             this.panelMenu.Controls.Add(this.tabResearch);
             this.panelMenu.Controls.Add(this.tabReport);
             this.panelMenu.Controls.Add(this.btnReset);
@@ -110,6 +111,14 @@
             this.panelMenu.Name = "panelMenu";
             this.panelMenu.Size = new System.Drawing.Size(162, 528);
             this.panelMenu.TabIndex = 1;
+            // 
+            // tabIndicator
+            // 
+            this.tabIndicator.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(117)))), ((int)(((byte)(153)))));
+            this.tabIndicator.Location = new System.Drawing.Point(1, 1);
+            this.tabIndicator.Name = "tabIndicator";
+            this.tabIndicator.Size = new System.Drawing.Size(16, 52);
+            this.tabIndicator.TabIndex = 2;
             // 
             // tabOther
             // 
@@ -131,45 +140,45 @@
             this.tabOther.UseVisualStyleBackColor = false;
             this.tabOther.Click += new System.EventHandler(this.tabOther_Click);
             // 
-            // tabMeetings
+            // tabMeeting
             // 
-            this.tabMeetings.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(12)))), ((int)(((byte)(12)))));
-            this.tabMeetings.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tabMeetings.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tabMeetings.FlatAppearance.BorderSize = 0;
-            this.tabMeetings.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(56)))), ((int)(((byte)(73)))));
-            this.tabMeetings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(90)))), ((int)(((byte)(118)))));
-            this.tabMeetings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.tabMeetings.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabMeetings.ForeColor = System.Drawing.Color.Silver;
-            this.tabMeetings.Location = new System.Drawing.Point(0, 260);
-            this.tabMeetings.Name = "tabMeetings";
-            this.tabMeetings.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
-            this.tabMeetings.Size = new System.Drawing.Size(162, 52);
-            this.tabMeetings.TabIndex = 13;
-            this.tabMeetings.Text = "Meetings";
-            this.tabMeetings.UseVisualStyleBackColor = false;
-            this.tabMeetings.Click += new System.EventHandler(this.tabMeetings_Click);
+            this.tabMeeting.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(12)))), ((int)(((byte)(12)))));
+            this.tabMeeting.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tabMeeting.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tabMeeting.FlatAppearance.BorderSize = 0;
+            this.tabMeeting.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(56)))), ((int)(((byte)(73)))));
+            this.tabMeeting.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(90)))), ((int)(((byte)(118)))));
+            this.tabMeeting.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.tabMeeting.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabMeeting.ForeColor = System.Drawing.Color.Silver;
+            this.tabMeeting.Location = new System.Drawing.Point(0, 260);
+            this.tabMeeting.Name = "tabMeeting";
+            this.tabMeeting.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
+            this.tabMeeting.Size = new System.Drawing.Size(162, 52);
+            this.tabMeeting.TabIndex = 13;
+            this.tabMeeting.Text = "Meetings";
+            this.tabMeeting.UseVisualStyleBackColor = false;
+            this.tabMeeting.Click += new System.EventHandler(this.tabMeetings_Click);
             // 
-            // tabHobbies
+            // tabHobby
             // 
-            this.tabHobbies.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(12)))), ((int)(((byte)(12)))));
-            this.tabHobbies.Cursor = System.Windows.Forms.Cursors.Default;
-            this.tabHobbies.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tabHobbies.FlatAppearance.BorderSize = 0;
-            this.tabHobbies.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(56)))), ((int)(((byte)(73)))));
-            this.tabHobbies.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(90)))), ((int)(((byte)(118)))));
-            this.tabHobbies.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.tabHobbies.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabHobbies.ForeColor = System.Drawing.Color.Silver;
-            this.tabHobbies.Location = new System.Drawing.Point(0, 208);
-            this.tabHobbies.Name = "tabHobbies";
-            this.tabHobbies.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
-            this.tabHobbies.Size = new System.Drawing.Size(162, 52);
-            this.tabHobbies.TabIndex = 12;
-            this.tabHobbies.Text = "Hobbies";
-            this.tabHobbies.UseVisualStyleBackColor = false;
-            this.tabHobbies.Click += new System.EventHandler(this.tabHobbies_Click);
+            this.tabHobby.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(12)))), ((int)(((byte)(12)))), ((int)(((byte)(12)))));
+            this.tabHobby.Cursor = System.Windows.Forms.Cursors.Default;
+            this.tabHobby.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tabHobby.FlatAppearance.BorderSize = 0;
+            this.tabHobby.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(56)))), ((int)(((byte)(73)))));
+            this.tabHobby.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(5)))), ((int)(((byte)(90)))), ((int)(((byte)(118)))));
+            this.tabHobby.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.tabHobby.Font = new System.Drawing.Font("Arial Rounded MT Bold", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabHobby.ForeColor = System.Drawing.Color.Silver;
+            this.tabHobby.Location = new System.Drawing.Point(0, 208);
+            this.tabHobby.Name = "tabHobby";
+            this.tabHobby.Padding = new System.Windows.Forms.Padding(16, 0, 0, 0);
+            this.tabHobby.Size = new System.Drawing.Size(162, 52);
+            this.tabHobby.TabIndex = 12;
+            this.tabHobby.Text = "Hobbies";
+            this.tabHobby.UseVisualStyleBackColor = false;
+            this.tabHobby.Click += new System.EventHandler(this.tabHobbies_Click);
             // 
             // btnDelete
             // 
@@ -189,14 +198,6 @@
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // tabIndicator
-            // 
-            this.tabIndicator.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(117)))), ((int)(((byte)(153)))));
-            this.tabIndicator.Location = new System.Drawing.Point(1, 1);
-            this.tabIndicator.Name = "tabIndicator";
-            this.tabIndicator.Size = new System.Drawing.Size(16, 52);
-            this.tabIndicator.TabIndex = 2;
             // 
             // tabResearch
             // 
@@ -362,7 +363,7 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(163)))), ((int)(((byte)(204)))));
-            this.label4.Location = new System.Drawing.Point(322, 447);
+            this.label4.Location = new System.Drawing.Point(322, 442);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 23);
             this.label4.TabIndex = 22;
@@ -374,7 +375,7 @@
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(163)))), ((int)(((byte)(204)))));
-            this.label3.Location = new System.Drawing.Point(19, 447);
+            this.label3.Location = new System.Drawing.Point(19, 442);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 23);
             this.label3.TabIndex = 21;
@@ -410,7 +411,7 @@
             this.txtTask.CustomButton.Visible = false;
             this.txtTask.ForeColor = System.Drawing.SystemColors.Control;
             this.txtTask.Lines = new string[0];
-            this.txtTask.Location = new System.Drawing.Point(100, 506);
+            this.txtTask.Location = new System.Drawing.Point(100, 501);
             this.txtTask.MaxLength = 32767;
             this.txtTask.Name = "txtTask";
             this.txtTask.PasswordChar = '\0';
@@ -443,7 +444,7 @@
             "Hobby",
             "Meeting",
             "Other"});
-            this.cmbType.Location = new System.Drawing.Point(397, 443);
+            this.cmbType.Location = new System.Drawing.Point(397, 438);
             this.cmbType.Name = "cmbType";
             this.cmbType.Size = new System.Drawing.Size(144, 25);
             this.cmbType.TabIndex = 15;
@@ -458,7 +459,7 @@
             this.dateTimePicker.FontSize = MetroFramework.MetroDateTimeSize.Small;
             this.dateTimePicker.FontWeight = MetroFramework.MetroDateTimeWeight.Bold;
             this.dateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker.Location = new System.Drawing.Point(101, 444);
+            this.dateTimePicker.Location = new System.Drawing.Point(101, 439);
             this.dateTimePicker.MinDate = new System.DateTime(2024, 1, 1, 0, 0, 0, 0);
             this.dateTimePicker.MinimumSize = new System.Drawing.Size(0, 25);
             this.dateTimePicker.Name = "dateTimePicker";
@@ -478,7 +479,7 @@
             this.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSend.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSend.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnSend.Location = new System.Drawing.Point(641, 505);
+            this.btnSend.Location = new System.Drawing.Point(641, 500);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(97, 34);
             this.btnSend.TabIndex = 8;
@@ -492,7 +493,7 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(163)))), ((int)(((byte)(204)))));
-            this.label2.Location = new System.Drawing.Point(19, 506);
+            this.label2.Location = new System.Drawing.Point(19, 501);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 23);
             this.label2.TabIndex = 4;
@@ -524,7 +525,7 @@
             this.labelVersion.BackColor = System.Drawing.Color.Transparent;
             this.labelVersion.Font = new System.Drawing.Font("Cascadia Mono", 9F, System.Drawing.FontStyle.Bold);
             this.labelVersion.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(163)))), ((int)(((byte)(204)))));
-            this.labelVersion.Location = new System.Drawing.Point(22, 638);
+            this.labelVersion.Location = new System.Drawing.Point(17, 636);
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(153, 24);
             this.labelVersion.TabIndex = 8;
@@ -536,7 +537,7 @@
             this.labelCopyright.BackColor = System.Drawing.Color.Transparent;
             this.labelCopyright.Font = new System.Drawing.Font("Cascadia Mono", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCopyright.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(163)))), ((int)(((byte)(204)))));
-            this.labelCopyright.Location = new System.Drawing.Point(645, 636);
+            this.labelCopyright.Location = new System.Drawing.Point(349, 636);
             this.labelCopyright.Name = "labelCopyright";
             this.labelCopyright.Size = new System.Drawing.Size(296, 24);
             this.labelCopyright.TabIndex = 6;
@@ -568,12 +569,25 @@
             this.timer1.Interval = 10;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.Font = new System.Drawing.Font("Cascadia Mono", 9F, System.Drawing.FontStyle.Bold);
+            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(163)))), ((int)(((byte)(204)))));
+            this.label6.Location = new System.Drawing.Point(794, 636);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(153, 24);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Under GPL-3.0";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(958, 668);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelVersion);
@@ -633,9 +647,10 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button tabHobbies;
+        private System.Windows.Forms.Button tabHobby;
         private System.Windows.Forms.Button tabOther;
-        private System.Windows.Forms.Button tabMeetings;
+        private System.Windows.Forms.Button tabMeeting;
+        private System.Windows.Forms.Label label6;
     }
 }
 

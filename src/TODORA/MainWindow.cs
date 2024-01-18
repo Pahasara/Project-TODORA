@@ -231,8 +231,8 @@ namespace TODORA
             tabALL.BackColor = Color.FromArgb(12, 12, 12);
             tabOther.BackColor = Color.FromArgb(12, 12, 12);
             tabReport.BackColor = Color.FromArgb(12, 12, 12);
-            tabHobbies.BackColor = Color.FromArgb(12, 12, 12);
-            tabMeetings.BackColor = Color.FromArgb(12, 12, 12);
+            tabHobby.BackColor = Color.FromArgb(12, 12, 12);
+            tabMeeting.BackColor = Color.FromArgb(12, 12, 12);
             tabIndicator.Location = btn.Location;
             btn.BackColor = Color.FromArgb(3, 36, 53);
         }
@@ -279,7 +279,7 @@ namespace TODORA
         private void tabHobbies_Click(object sender, EventArgs e)
         {
             SetType("Hobby");
-            SetTab(tabHobbies);
+            SetTab(tabHobby);
             cmbType.SelectedIndex = 3;
             ReadData();
         }
@@ -287,7 +287,7 @@ namespace TODORA
         private void tabMeetings_Click(object sender, EventArgs e)
         {
             SetType("Meeting");
-            SetTab(tabMeetings);
+            SetTab(tabMeeting);
             cmbType.SelectedIndex = 4;
             ReadData();
         }

@@ -32,7 +32,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Splash));
             this.timerProgress = new System.Windows.Forms.Timer(this.components);
             this.panelBackground = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.panelBackground.SuspendLayout();
@@ -47,7 +46,6 @@
             this.panelBackground.BackColor = System.Drawing.Color.Black;
             this.panelBackground.BackgroundImage = global::Todora.Properties.Resources.BG;
             this.panelBackground.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.panelBackground.Controls.Add(this.label2);
             this.panelBackground.Controls.Add(this.label12);
             this.panelBackground.Controls.Add(this.label1);
             this.panelBackground.Location = new System.Drawing.Point(2, 2);
@@ -55,17 +53,6 @@
             this.panelBackground.Name = "panelBackground";
             this.panelBackground.Size = new System.Drawing.Size(501, 217);
             this.panelBackground.TabIndex = 9;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Arial Rounded MT Bold", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(173)))), ((int)(((byte)(214)))));
-            this.label2.Location = new System.Drawing.Point(303, 189);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(187, 18);
-            this.label2.TabIndex = 27;
-            this.label2.Text = "© 2024 TEAM BISHOP.";
             // 
             // label12
             // 
@@ -118,6 +105,5 @@
         private System.Windows.Forms.Panel panelBackground;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label2;
     }
 }
