@@ -6,7 +6,7 @@ TODORA is a to-do-list manager software that helps you organize your tasks in a 
 
 ## Downloads ##
 
-<a href="github.com/pahasara/TODORA" style="background-color:green;color:white;padding:10px;border-radius:5px;text-decoration:none;">Download</a>
+<a href="https://www.github.com/pahasara/TODORA" style="background-color:green;color:white;padding:10px;border-radius:5px;text-decoration:none;">Download</a>
 
 
 ## Requirements ##
