@@ -59,15 +59,16 @@
             this.labelVersion = new System.Windows.Forms.Label();
             this.labelCopyright = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.titleLogo = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label6 = new System.Windows.Forms.Label();
+            this.timerStartUp = new System.Windows.Forms.Timer(this.components);
             this.panelMainMnu.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panelMenu.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panelBody.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.titleLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // panelMainMnu
@@ -467,6 +468,7 @@
             this.dateTimePicker.TabIndex = 14;
             this.dateTimePicker.Theme = MetroFramework.MetroThemeStyle.Dark;
             this.dateTimePicker.UseCustomForeColor = true;
+            this.dateTimePicker.ValueChanged += new System.EventHandler(this.dateTimePicker_ValueChanged);
             // 
             // btnSend
             // 
@@ -529,7 +531,7 @@
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(153, 24);
             this.labelVersion.TabIndex = 8;
-            this.labelVersion.Text = "TODORA v2.0.1";
+            this.labelVersion.Text = "TODORA v2.0.2";
             // 
             // labelCopyright
             // 
@@ -537,7 +539,7 @@
             this.labelCopyright.BackColor = System.Drawing.Color.Transparent;
             this.labelCopyright.Font = new System.Drawing.Font("Cascadia Mono", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCopyright.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(163)))), ((int)(((byte)(204)))));
-            this.labelCopyright.Location = new System.Drawing.Point(349, 636);
+            this.labelCopyright.Location = new System.Drawing.Point(346, 636);
             this.labelCopyright.Name = "labelCopyright";
             this.labelCopyright.Size = new System.Drawing.Size(296, 24);
             this.labelCopyright.TabIndex = 6;
@@ -554,15 +556,17 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "TODORA v2.0";
             // 
-            // pictureBox1
+            // titleLogo
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(11, 7);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(49, 48);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 10;
-            this.pictureBox1.TabStop = false;
+            this.titleLogo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.titleLogo.Image = ((System.Drawing.Image)(resources.GetObject("titleLogo.Image")));
+            this.titleLogo.Location = new System.Drawing.Point(4, 7);
+            this.titleLogo.Name = "titleLogo";
+            this.titleLogo.Size = new System.Drawing.Size(49, 48);
+            this.titleLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.titleLogo.TabIndex = 10;
+            this.titleLogo.TabStop = false;
+            this.titleLogo.Click += new System.EventHandler(this.titleLogo_Click);
             // 
             // timer1
             // 
@@ -575,11 +579,11 @@
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Cascadia Mono", 9F, System.Drawing.FontStyle.Bold);
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(6)))), ((int)(((byte)(163)))), ((int)(((byte)(204)))));
-            this.label6.Location = new System.Drawing.Point(794, 636);
+            this.label6.Location = new System.Drawing.Point(856, 636);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(153, 24);
+            this.label6.Size = new System.Drawing.Size(87, 24);
             this.label6.TabIndex = 11;
-            this.label6.Text = "Under GPL-3.0";
+            this.label6.Text = "GPL-3.0";
             // 
             // MainWindow
             // 
@@ -588,7 +592,7 @@
             this.BorderStyle = MetroFramework.Forms.MetroFormBorderStyle.FixedSingle;
             this.ClientSize = new System.Drawing.Size(958, 668);
             this.Controls.Add(this.label6);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.titleLogo);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelVersion);
             this.Controls.Add(this.labelCopyright);
@@ -612,7 +616,7 @@
             this.panel4.PerformLayout();
             this.panelBody.ResumeLayout(false);
             this.panelBody.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.titleLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -638,7 +642,7 @@
         private System.Windows.Forms.Button tabResearch;
         private MetroFramework.Controls.MetroDateTime dateTimePicker;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox titleLogo;
         private MetroFramework.Controls.MetroComboBox cmbType;
         private MetroFramework.Controls.MetroTextBox txtTask;
         private System.Windows.Forms.ListBox lstTask;
@@ -651,6 +655,7 @@
         private System.Windows.Forms.Button tabOther;
         private System.Windows.Forms.Button tabMeeting;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Timer timerStartUp;
     }
 }
 

@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Data.SQLite;
+using System.Diagnostics;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace TODORA
 {
@@ -37,7 +40,7 @@ namespace TODORA
         {
             SQLiteConnection conn = CreateConnection();
             SQLiteCommand sql_cmd = conn.CreateCommand();
-            string values = $"'{dateTimePicker.Value.ToShortDateString()}', '{txtTask.Text}', '{cmbType.SelectedItem}'";
+            string values = $"\"{dateTimePicker.Value.ToShortDateString()}\", \"{txtTask.Text}\", \"{cmbType.SelectedItem}\"";
             try
             {
                 sql_cmd.CommandText = $"INSERT INTO TaskList (Date, Task, Type) VALUES({values});";
@@ -59,9 +62,31 @@ namespace TODORA
             {
                 return ";";
             }
+
         }
 
-        private void ReadData()
+        private string SelectData(bool isDateChanged = false)
+        {
+            if (!isDateChanged)
+            {
+                return $"SELECT * FROM TaskList {GetTaskType()}";
+            }
+            else
+            {
+                string _date = dateTimePicker.Value.ToShortDateString();
+                if (selectedType == "")
+                {
+                    return $"SELECT * FROM TaskList WHERE Date = '{_date}';";
+                }
+                else
+                {
+                    return $"SELECT * FROM TaskList WHERE Date = '{_date}' AND Type = '{selectedType}';";
+
+                }
+            }
+        }
+
+        private void ReadData(bool isDateChanged = false)
         {
             SQLiteConnection conn = CreateConnection();
             SQLiteCommand sql_cmd = conn.CreateCommand();
@@ -69,18 +94,22 @@ namespace TODORA
 
             try
             {
-                sql_cmd.CommandText = "SELECT * FROM TaskList" + GetTaskType();
+                sql_cmd.CommandText = SelectData(isDateChanged);
                 sql_datareader = sql_cmd.ExecuteReader();
                 lstTask.Items.Clear();
 
                 while (sql_datareader.Read())
                 {
+                    string formattedTask;
                     string id = sql_datareader.GetInt32(0).ToString().PadLeft(3, '0');
+                    string date = sql_datareader.GetString(1).Replace('/', '-').PadLeft(10, ' ');
                     string task = sql_datareader.GetString(2);
-                    string type = sql_datareader.GetString(3);
-                    string date = sql_datareader.GetString(1).Replace('/', '-');
-
-                    string formattedTask = $"{id}  |  {task}        <{type}>        [{date}]\n";
+                    formattedTask = $"{date}  |  {task}\n";
+                    if (selectedType == "")
+                    {
+                        string type = sql_datareader.GetString(3);
+                        formattedTask = $"{date}  |  {task}     <{type}>\n";
+                    }
                     lstTask.Items.Add(formattedTask);
                 }
             }
@@ -114,16 +143,49 @@ namespace TODORA
             }
         }
 
-        private void DeleteTask(int index)
+        private string SetTaskToDelete()
+        {
+            string fullTask = lstTask.SelectedItem.ToString();
+            int charPos = fullTask.IndexOf("|");
+            fullTask = fullTask.Substring(charPos + 3);
+
+            try
+            {
+                charPos = fullTask.IndexOf("<");
+                string remain = fullTask.Substring(charPos - 5);
+                fullTask = fullTask.Replace(remain, "");
+            }
+            catch (Exception)
+            {
+                charPos = 0;
+            }
+            return fullTask;
+        }
+
+        private string GetTaskToDelete(string taskWithRemain)
+        {
+            string taskOnly = "";
+            foreach (char x in taskWithRemain)
+            {
+                if (x == '\0')
+                {
+                    break;
+                }
+                taskOnly += x;
+            }
+            return taskOnly.TrimEnd();
+        }
+
+        private void DeleteTask(string task)
         {
             SQLiteConnection conn = CreateConnection();
             SQLiteCommand sql_cmd = conn.CreateCommand();
-            if (MessageBox.Show(this, "Task " + index.ToString().PadLeft(3, '0') + " will be deleted. Do you Want to Confirm", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+            if (MessageBox.Show(this, $"Task '{task}' will be deleted. Do you Want to Confirm", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
                 try
                 {
                     sql_cmd = conn.CreateCommand();
-                    sql_cmd.CommandText = $"DELETE FROM TaskList WHERE ID = {index};";
+                    sql_cmd.CommandText = $"DELETE FROM TaskList WHERE Task = \"{task}\";";
                     sql_cmd.ExecuteNonQuery();
                     ReadData();
                 }
@@ -143,8 +205,8 @@ namespace TODORA
         {
             timer1.Enabled = true;
             cmbType.SelectedIndex = 0;
-
             ReadData();
+
             if (lstTask.Items.Count == 0)
             {
                 lstTask.Items.Add("Nothing to do...");
@@ -189,25 +251,8 @@ namespace TODORA
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            string task = lstTask.SelectedItem.ToString();
-            int charPos = task.IndexOf("#");
-            task = task.Substring(charPos + 1);
-
-            string index = "";
-
-            foreach (char x in task)
-            {
-                if (x == ' ')
-                {
-                    break;
-                }
-                if (x == '#')
-                {
-                    continue;
-                }
-                index += x;
-            }
-            DeleteTask(Convert.ToInt32(index));
+            string taskToBeDeleted = GetTaskToDelete(SetTaskToDelete());
+            DeleteTask(taskToBeDeleted);
         }
 
         private void btnSend_Click(object sender, EventArgs e)
@@ -290,6 +335,16 @@ namespace TODORA
             SetTab(tabMeeting);
             cmbType.SelectedIndex = 4;
             ReadData();
+        }
+
+        private void dateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            ReadData(true);
+        }
+
+        private void titleLogo_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/pahasara/todora");
         }
     }
 }
