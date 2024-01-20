@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+using Todora;
 
 namespace TODORA
 {
@@ -15,185 +15,12 @@ namespace TODORA
             InitializeComponent();
         }
 
+        Core core = new Core();
         string selectedType = ""; // Selected Tab (All tasks/Report/...)
-
-        private static SQLiteConnection CreateConnection()
-        {
-            SQLiteConnection conn = new SQLiteConnection("Data Source=database.db; Version = 3; New = True; Compress = True; ");
-            try
-            {
-                conn.Open();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("An error occurred while connecting to the database. If the problem persists, please report the issue on GitHub: github.com/pahasara/todora/issues", "CreateConnection", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return conn;
-        }
 
         private void SetType(string type = "")
         {
             selectedType = type;
-        }
-
-        private void InsertData()
-        {
-            SQLiteConnection conn = CreateConnection();
-            SQLiteCommand sql_cmd = conn.CreateCommand();
-            string values = $"\"{dateTimePicker.Value.ToShortDateString()}\", \"{txtTask.Text}\", \"{cmbType.SelectedItem}\"";
-            try
-            {
-                sql_cmd.CommandText = $"INSERT INTO TaskList (Date, Task, Type) VALUES({values});";
-                sql_cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "InsertData");
-            }
-        }
-
-        private string GetTaskType()
-        {
-            if (selectedType != "")
-            {
-                return $" WHERE Type = '{selectedType}';";
-            }
-            else
-            {
-                return ";";
-            }
-
-        }
-
-        private string SelectData(bool isDateChanged = false)
-        {
-            if (!isDateChanged)
-            {
-                return $"SELECT * FROM TaskList {GetTaskType()}";
-            }
-            else
-            {
-                string _date = dateTimePicker.Value.ToShortDateString();
-                if (selectedType == "")
-                {
-                    return $"SELECT * FROM TaskList WHERE Date = '{_date}';";
-                }
-                else
-                {
-                    return $"SELECT * FROM TaskList WHERE Date = '{_date}' AND Type = '{selectedType}';";
-
-                }
-            }
-        }
-
-        private void ReadData(bool isDateChanged = false)
-        {
-            SQLiteConnection conn = CreateConnection();
-            SQLiteCommand sql_cmd = conn.CreateCommand();
-            SQLiteDataReader sql_datareader;
-
-            try
-            {
-                sql_cmd.CommandText = SelectData(isDateChanged);
-                sql_datareader = sql_cmd.ExecuteReader();
-                lstTask.Items.Clear();
-
-                while (sql_datareader.Read())
-                {
-                    string formattedTask;
-                    string id = sql_datareader.GetInt32(0).ToString().PadLeft(3, '0');
-                    string date = sql_datareader.GetString(1).Replace('/', '-').PadLeft(10, ' ');
-                    string task = sql_datareader.GetString(2);
-                    formattedTask = $"{date}  |  {task}\n";
-                    if (selectedType == "")
-                    {
-                        string type = sql_datareader.GetString(3);
-                        formattedTask = $"{date}  |  {task}     <{type}>\n";
-                    }
-                    lstTask.Items.Add(formattedTask);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "ReadData");
-            }
-        }
-
-        private void ResetData()
-        {
-            SQLiteConnection conn = CreateConnection();
-            SQLiteCommand sql_cmd = conn.CreateCommand();
-            try
-            {
-                sql_cmd.CommandText = "DELETE FROM TaskList";
-                if (selectedType == "")
-                {
-                    sql_cmd.CommandText += ";UPDATE SQLITE_SEQUENCE SET SEQ=0 WHERE NAME='TaskList';";
-                }
-                else
-                {
-                    sql_cmd.CommandText += $" WHERE Type='{selectedType}';";
-                }
-                sql_cmd.ExecuteNonQuery();
-                ClearTasks();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString(), "Couldn't reset");
-            }
-        }
-
-        private string SetTaskToDelete()
-        {
-            string fullTask = lstTask.SelectedItem.ToString();
-            int charPos = fullTask.IndexOf("|");
-            fullTask = fullTask.Substring(charPos + 3);
-
-            try
-            {
-                charPos = fullTask.IndexOf("<");
-                string remain = fullTask.Substring(charPos - 5);
-                fullTask = fullTask.Replace(remain, "");
-            }
-            catch (Exception)
-            {
-                charPos = 0;
-            }
-            return fullTask;
-        }
-
-        private string GetTaskToDelete(string taskWithRemain)
-        {
-            string taskOnly = "";
-            foreach (char x in taskWithRemain)
-            {
-                if (x == '\0')
-                {
-                    break;
-                }
-                taskOnly += x;
-            }
-            return taskOnly.TrimEnd();
-        }
-
-        private void DeleteTask(string task)
-        {
-            SQLiteConnection conn = CreateConnection();
-            SQLiteCommand sql_cmd = conn.CreateCommand();
-            if (MessageBox.Show(this, $"Task '{task}' will be deleted. Do you Want to Confirm", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
-            {
-                try
-                {
-                    sql_cmd = conn.CreateCommand();
-                    sql_cmd.CommandText = $"DELETE FROM TaskList WHERE Task = \"{task}\";";
-                    sql_cmd.ExecuteNonQuery();
-                    ReadData();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.ToString(), "DeleteTask");
-                }
-            }
         }
 
         private void ClearTasks()
@@ -201,34 +28,85 @@ namespace TODORA
             lstTask.Items.Clear();
         }
 
-        private void MainWindow_Load(object sender, EventArgs e)
+        private void ReadData(string sqlCommand, string selectedType)
         {
-            timer1.Enabled = true;
-            cmbType.SelectedIndex = 0;
-            ReadData();
-
-            if (lstTask.Items.Count == 0)
+            SQLiteConnection conn = Core.CreateConnection();
+            SQLiteCommand sql_cmd = conn.CreateCommand();
+            SQLiteDataReader sql_datareader;
+            string formattedTask;
+            try
             {
-                lstTask.Items.Add("Nothing to do...");
+
+                sql_cmd.CommandText = sqlCommand;
+                sql_datareader = sql_cmd.ExecuteReader();
+                while (sql_datareader.Read())
+                {
+                    string date = sql_datareader.GetString(1).Replace('/', '-').PadLeft(10, ' ');
+                    string task = sql_datareader.GetString(2);
+                    if (selectedType == "")
+                    {
+                        string type = sql_datareader.GetString(3);
+                        formattedTask = $"{date}  |  {task}     <{type}>\n";
+                    }
+                    else
+                    {
+                        formattedTask = $"{date}  |  {task}\n";
+                    }
+                    lstTask.Items.Add(formattedTask);
+                }
+            }
+            catch (SQLiteException ex)
+            {
+                MessageBox.Show(ex.Message, "Reading Error");
             }
         }
 
-        private void btnReset_Click(object sender, EventArgs e)
+        private void Read(bool isDateChanged = false)
+        {
+            string selectedDate = dateTimePicker.Value.ToShortDateString();
+            string sqlCommand = core.SelectData(selectedType, selectedDate, isDateChanged);
+            ClearTasks();
+            ReadData(sqlCommand, selectedType);
+        }
+
+        private void Send()
+        {
+            if (!string.IsNullOrWhiteSpace(txtTask.Text))
+            {
+                string date = dateTimePicker.Value.ToShortDateString();
+                string task = txtTask.Text.Trim();
+                string type = cmbType.SelectedItem.ToString();
+                core.InsertData(date, task, type);
+                txtTask.Clear();
+                Read();
+            }
+            else
+            {
+                MessageBox.Show("Please enter a valid task before saving.", "Validation Error");
+            }
+        }
+
+        private void Delete()
+        {
+            string selectedItem = lstTask.SelectedItem.ToString();
+            string taskToBeDeleted = core.GetTaskToDelete(selectedItem);
+            core.DeleteTask(taskToBeDeleted);
+            Read();
+        }
+
+        private void Reset()
         {
             if (MessageBox.Show("All data in this tab will be deleted. Do you Want to Confirm", "Confirmation", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
             {
-                ResetData();
+                if (core.ResetData(selectedType))
+                {
+                    ClearTasks();
+                }
             }
         }
 
-        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        private void ValidateDelete()
         {
-            Application.Exit();
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            // Validate btnDelete
             if (lstTask.SelectedItems.Count > 0 && lstTask.SelectedItem.ToString() != "Nothing to do...")
             {
                 btnDelete.Enabled = true;
@@ -237,8 +115,10 @@ namespace TODORA
             {
                 btnDelete.Enabled = false;
             }
+        }
 
-            // Validate btnSend
+        private void ValidateSend()
+        {
             if (txtTask.Text != "")
             {
                 btnSend.Enabled = true;
@@ -249,24 +129,41 @@ namespace TODORA
             }
         }
 
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+            timer1.Enabled = true;
+            cmbType.SelectedIndex = 0;
+            Read();
+            if (lstTask.Items.Count == 0)
+            {
+                lstTask.Items.Add("Nothing to do...");
+            }
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            Reset();
+        }
+
+        private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            ValidateDelete();
+            ValidateSend();
+        }
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            string taskToBeDeleted = GetTaskToDelete(SetTaskToDelete());
-            DeleteTask(taskToBeDeleted);
+            Delete();
         }
 
         private void btnSend_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(txtTask.Text))
-            {
-                InsertData();
-                txtTask.Clear();
-                ReadData();
-            }
-            else
-            {
-                MessageBox.Show("Please enter a valid task before saving.", "Validation Error");
-            }
+            Send();
         }
 
         private void SetTab(Button btn)
@@ -286,7 +183,7 @@ namespace TODORA
         {
             SetType();
             SetTab(tabALL);
-            ReadData();
+            Read();
         }
 
         private void tabAssignment_Click(object sender, EventArgs e)
@@ -294,7 +191,7 @@ namespace TODORA
             SetType("Assignment");
             SetTab(tabAssignment);
             cmbType.SelectedIndex = 0;
-            ReadData();
+            Read();
         }
 
         private void tabReport_Click(object sender, EventArgs e)
@@ -302,7 +199,7 @@ namespace TODORA
             SetType("Report");
             SetTab(tabReport);
             cmbType.SelectedIndex = 1;
-            ReadData();
+            Read();
         }
 
         private void tabResearch_Click(object sender, EventArgs e)
@@ -310,7 +207,7 @@ namespace TODORA
             SetType("Research");
             SetTab(tabResearch);
             cmbType.SelectedIndex = 2;
-            ReadData();
+            Read();
         }
 
         private void tabOther_Click(object sender, EventArgs e)
@@ -318,7 +215,7 @@ namespace TODORA
             SetType("Other");
             SetTab(tabOther);
             cmbType.SelectedIndex = 5;
-            ReadData();
+            Read();
         }
 
         private void tabHobbies_Click(object sender, EventArgs e)
@@ -326,7 +223,7 @@ namespace TODORA
             SetType("Hobby");
             SetTab(tabHobby);
             cmbType.SelectedIndex = 3;
-            ReadData();
+            Read();
         }
 
         private void tabMeetings_Click(object sender, EventArgs e)
@@ -334,12 +231,12 @@ namespace TODORA
             SetType("Meeting");
             SetTab(tabMeeting);
             cmbType.SelectedIndex = 4;
-            ReadData();
+            Read();
         }
 
         private void dateTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            ReadData(true);
+            Read(true);
         }
 
         private void titleLogo_Click(object sender, EventArgs e)

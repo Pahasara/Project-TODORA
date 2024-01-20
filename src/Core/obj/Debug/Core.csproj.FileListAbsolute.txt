@@ -1,0 +1,6 @@
+C:\Users\Pahasara\OneDrive\Documents\GitHub\Project-TODORA\src\Core\bin\Debug\Core.dll
+C:\Users\Pahasara\OneDrive\Documents\GitHub\Project-TODORA\src\Core\bin\Debug\Core.pdb
+C:\Users\Pahasara\OneDrive\Documents\GitHub\Project-TODORA\src\Core\obj\Debug\Core.csproj.AssemblyReference.cache
+C:\Users\Pahasara\OneDrive\Documents\GitHub\Project-TODORA\src\Core\obj\Debug\Core.csproj.CoreCompileInputs.cache
+C:\Users\Pahasara\OneDrive\Documents\GitHub\Project-TODORA\src\Core\obj\Debug\Core.dll
+C:\Users\Pahasara\OneDrive\Documents\GitHub\Project-TODORA\src\Core\obj\Debug\Core.pdb
