@@ -243,5 +243,13 @@ namespace TODORA
         {
             Process.Start("https://github.com/pahasara/todora");
         }
+
+        private void txtTask_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                Send();
+            }
+        }
     }
 }
