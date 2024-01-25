@@ -4,8 +4,8 @@ TODORA is a to-do-list manager software that helps you organize your tasks in a 
 
 ### Downloads ###
 
-[![ZIP](https://img.shields.io/badge/bin.zip%20[4.87MB]-blue)](https://github.com/Pahasara/TODORA/releases/download/Todora-2.0.1/bin.zip)
-[![SETUP](https://img.shields.io/badge/Setup.exe%20[5.41MB]-darkgreen)](https://github.com/Pahasara/TODORA/releases/download/Todora-2.0.1/setup.exe)
+[![ZIP](https://img.shields.io/badge/bin.zip%20[4.87MB]-blue)](https://github.com/Pahasara/TODORA/releases/download/Todora-2.0.3/bin.zip)
+[![SETUP](https://img.shields.io/badge/Setup.exe%20[5.41MB]-darkgreen)](https://github.com/Pahasara/TODORA/releases/download/Todora-2.0.3/setup.exe)
 
 <img width="481" alt="Untitled" src="https://github.com/Pahasara/TODORA/assets/46932317/538965ab-3068-49e1-80e4-33387ba2deaa">
 
