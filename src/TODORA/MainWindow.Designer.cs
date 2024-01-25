@@ -532,7 +532,7 @@
             this.labelVersion.Name = "labelVersion";
             this.labelVersion.Size = new System.Drawing.Size(153, 24);
             this.labelVersion.TabIndex = 8;
-            this.labelVersion.Text = "TODORA v2.0.2";
+            this.labelVersion.Text = "TODORA v2.0.3";
             // 
             // labelCopyright
             // 

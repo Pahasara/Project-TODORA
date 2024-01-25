@@ -69,13 +69,12 @@ namespace Todora
             string fullTask = selectedItem;
             int strPosition = fullTask.IndexOf("  |") + 5;
             fullTask = fullTask.Substring(strPosition);
-
             try
             {
                 strPosition = fullTask.IndexOf("     <");
                 if (strPosition > 0)
                 {
-                    MessageBox.Show(strPosition.ToString());
+
                     string remain = fullTask.Substring(strPosition);
                     fullTask = fullTask.Replace(remain, "");
                 }
